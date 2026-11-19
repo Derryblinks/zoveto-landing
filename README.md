@@ -53,7 +53,7 @@ public/             Favicon and robots.txt
 
 - **Content is separate from presentation.** Sections read from `src/content/*`, which is typed (`types.ts`). To change wording, plans, FAQ or navigation, edit those files.
 - **One section, one file.** Sections are independent. Reorder or remove them in `src/app/app.tsx`.
-- **Design tokens live in `src/styles/index.css`.** Use semantic utilities (`bg-surface`, `text-ink`, `text-muted`, `border-line`, `bg-deep`, `bg-lime`). Light and dark mode follow the visitor's system setting automatically.
+- **Design tokens live in `src/styles/index.css`.** Use semantic utilities (`bg-surface`, `text-ink`, `text-muted`, `border-line`, `bg-deep`, `bg-mint`). Light and dark mode follow the visitor's system setting automatically.
 - **Links into the app go through `src/config/site.ts`**, never hard-coded.
 - **Path alias:** `@/` points to `src/`.
 
@@ -64,7 +64,9 @@ public/             Favicon and robots.txt
 
 ## Content notes before you publish
 
-- The page describes the **planned** product. Pharmacy marketplace, Mobile Money payments and paid plans are listed, but are not built in the application yet. Edit `src/content` if you want the page to claim only what is live.
+- The page describes a product that is built in stages. Features that arrive after the core marketplace (health records, reminders, pharmacy catalogue, finance, offline records, disease documentation, medicine stock) carry `planned: true` in `src/content/features.ts` and `src/content/field-tools.ts`, which shows a "Planned" tag. Remove the flag as each one goes live. The hero, audience, FAQ and fact wording that says "planned" lives in the same folder and needs the same update.
+- Payment methods are not named on the page because the payment provider is not decided.
+- The privacy notice, terms of use and support contact are not written yet. Set `VITE_PRIVACY_URL`, `VITE_TERMS_URL` and `VITE_SUPPORT_EMAIL` (see `.env.example`) when each exists and the footer links to it. Until then the footer says it is not published yet. Publish a privacy notice before collecting any personal data or going live.
 - Plan prices are intentionally absent. Add them in `src/content/plans.ts` when decided.
 - The dashboard and phone illustrations use sample entries and are labelled as such.
 - The footer has no legal links. Add Terms and Privacy pages and link them from `src/components/layout/footer.tsx`.
