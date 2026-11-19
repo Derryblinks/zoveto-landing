@@ -10,7 +10,7 @@ export function Header() {
   const menu = useDisclosure();
 
   return (
-    <header className="bg-deep sticky top-0 z-50">
+    <header className="bg-bg/95 border-line sticky top-0 z-50 border-b">
       <Container className="flex h-[72px] items-center justify-between gap-4">
         <a href="#top" aria-label="ZOVETO home" onClick={menu.close}>
           <Logo />
@@ -22,7 +22,7 @@ export function Header() {
               <li key={item.href}>
                 <a
                   href={item.href}
-                  className="text-on-deep hover:text-lime text-[15px] font-medium transition"
+                  className="text-body hover:text-forest text-[15px] font-medium transition"
                 >
                   {item.label}
                 </a>
@@ -34,13 +34,13 @@ export function Header() {
         <div className="flex items-center gap-2.5">
           <ButtonLink
             href={loginLink()}
-            variant="outline-light"
+            variant="outline"
             size="sm"
             className="hidden sm:inline-flex"
           >
             Log in
           </ButtonLink>
-          <ButtonLink href={registerLink()} variant="lime" size="sm">
+          <ButtonLink href={registerLink()} variant="primary" size="sm">
             Create account
           </ButtonLink>
           <button
@@ -49,7 +49,7 @@ export function Header() {
             aria-expanded={menu.open}
             aria-controls="mobile-menu"
             aria-label={menu.open ? "Close menu" : "Open menu"}
-            className="grid size-11 place-items-center rounded-full text-white hover:bg-white/10 md:hidden"
+            className="text-ink hover:bg-surface grid size-11 place-items-center rounded-full md:hidden"
           >
             {menu.open ? (
               <X className="size-5" aria-hidden="true" />
@@ -61,18 +61,14 @@ export function Header() {
       </Container>
 
       {menu.open ? (
-        <nav
-          id="mobile-menu"
-          aria-label="Mobile"
-          className="bg-deep border-t border-white/10 md:hidden"
-        >
+        <nav id="mobile-menu" aria-label="Mobile" className="bg-bg border-line border-t md:hidden">
           <ul className="mx-auto max-w-[1160px] px-6 py-3">
             {navigation.map((item) => (
               <li key={item.href}>
                 <a
                   href={item.href}
                   onClick={menu.close}
-                  className="text-on-deep hover:text-lime flex min-h-12 items-center text-base font-medium"
+                  className="text-body hover:text-forest flex min-h-12 items-center text-base font-medium"
                 >
                   {item.label}
                 </a>
@@ -81,7 +77,7 @@ export function Header() {
             <li className="sm:hidden">
               <a
                 href={loginLink()}
-                className="text-on-deep hover:text-lime flex min-h-12 items-center text-base font-medium"
+                className="text-body hover:text-forest flex min-h-12 items-center text-base font-medium"
               >
                 Log in
               </a>

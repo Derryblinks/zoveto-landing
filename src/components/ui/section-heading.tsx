@@ -26,7 +26,7 @@ export function SectionHeading({
         <span
           className={cn(
             "mb-4 inline-block rounded-full border px-3.5 py-1 text-[13px] font-semibold",
-            onDark ? "text-lime border-white/25" : "border-line bg-surface text-accent",
+            onDark ? "text-cream border-white/25" : "border-line bg-surface text-accent",
           )}
         >
           {kicker}

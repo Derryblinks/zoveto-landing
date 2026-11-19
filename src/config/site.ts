@@ -1,16 +1,15 @@
 export type Role = "farmer" | "keeper" | "vet" | "pharmacy";
 
-const DEFAULT_APP_URL = "http://localhost:3000";
-
-/** Site-wide constants. The app URL is the only value that changes between environments. */
+/** Site-wide constants. A configured app URL can override local same-origin routes. */
 export const site = {
   name: "ZOVETO",
-  tagline: "Veterinary care, connected across Ghana.",
-  appUrl: import.meta.env.VITE_APP_URL?.trim() || DEFAULT_APP_URL,
+  tagline: "Helping animal owners and vets stay connected.",
+  appUrl: import.meta.env.VITE_APP_URL?.trim() ?? "",
 } as const;
 
-/** Builds an absolute link into the ZOVETO web application. */
-export const appLink = (path: string): string => new URL(path, site.appUrl).toString();
+/** Builds an application link, using local routes unless a separate app URL is configured. */
+export const appLink = (path: string): string =>
+  site.appUrl ? new URL(path, site.appUrl).toString() : path;
 
 export const loginLink = (): string => appLink("/login");
 export const registerLink = (role?: Role): string =>

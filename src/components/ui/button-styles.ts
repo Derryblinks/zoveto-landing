@@ -1,9 +1,9 @@
 import { cn } from "@/lib/cn";
 
 const variants = {
-  lime: "bg-lime text-deep hover:brightness-95",
+  cream: "bg-cream text-deep hover:brightness-95",
   "outline-light": "border-white/35 text-white hover:bg-white/10",
-  primary: "bg-accent text-white hover:brightness-110 dark:text-deep",
+  primary: "bg-accent text-white hover:brightness-110",
   outline: "border-line text-ink hover:bg-surface",
   dark: "bg-deep text-white hover:bg-deep-2",
 } as const;

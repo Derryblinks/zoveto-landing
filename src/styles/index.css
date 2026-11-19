@@ -1,38 +1,19 @@
 @import "tailwindcss";
 
-/*
- * Design tokens.
- * Semantic colours change with the visitor's light or dark preference. Brand colours are fixed.
- * Tailwind exposes them as utilities: bg-bg, bg-surface, bg-card, text-ink, text-body, text-muted,
- * border-line, text-accent, bg-deep, bg-lime.
- */
 :root {
-  --bg: #ffffff;
-  --surface: #eef5f0;
+  --bg: #fffdf5;
+  --surface: #f5f2e7;
   --card: #ffffff;
-  --ink: #0b2a1b;
-  --body: #3b5246;
-  --muted: #657a6e;
-  --line: #dce7df;
-  --accent: #087a3b;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0a1812;
-    --surface: #0f2219;
-    --card: #122a1f;
-    --ink: #eaf5ee;
-    --body: #c2d6c9;
-    --muted: #93ab9b;
-    --line: #25423a;
-    --accent: #4fcb8b;
-  }
+  --ink: #001b0d;
+  --body: #394638;
+  --muted: #65705e;
+  --line: #e4e1d4;
+  --accent: #416428;
 }
 
 @theme inline {
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Space Grotesk Variable", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
 
   --color-bg: var(--bg);
   --color-surface: var(--surface);
@@ -43,19 +24,21 @@
   --color-line: var(--line);
   --color-accent: var(--accent);
 
-  --color-deep: #07351f;
-  --color-deep-2: #0b4a2a;
-  --color-lime: #b6f23b;
-  --color-on-deep: #e4f1e8;
-  --color-on-deep-muted: #a2c2ae;
+  --color-deep: #001b0d;
+  --color-deep-2: #416428;
+  --color-forest: #416428;
+  --color-sage: #9eb57d;
+  --color-tan: #c1af85;
+  --color-cream: #fbf0ba;
+  --color-on-deep: #fffdf5;
+  --color-on-deep-muted: #e1e6d9;
 
-  /* Colours used inside the product mock-ups, which always show the light app. */
-  --color-app-ink: #0b2a1b;
-  --color-app-body: #32473e;
-  --color-app-muted: #6b8074;
-  --color-app-line: #e4ede7;
-  --color-app-bg: #f6f9f7;
-  --color-app-brand: #087a3b;
+  --color-app-ink: #001b0d;
+  --color-app-body: #394638;
+  --color-app-muted: #65705e;
+  --color-app-line: #e4e1d4;
+  --color-app-bg: #fffdf5;
+  --color-app-brand: #416428;
 }
 
 @layer base {
@@ -65,7 +48,7 @@
     -webkit-font-smoothing: antialiased;
   }
   body {
-    @apply bg-deep text-body font-sans text-base leading-relaxed;
+    @apply bg-bg text-body font-sans text-base leading-relaxed;
   }
   h1,
   h2,
@@ -74,12 +57,76 @@
     @apply font-display text-ink font-bold tracking-tight;
   }
   :focus-visible {
-    outline: 3px solid #f0a21b;
+    outline: 3px solid #416428;
     outline-offset: 2px;
   }
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
+    }
+  }
+
+  @keyframes enter-up {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes draw-line {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  .chart-line {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: draw-line 1.2s ease-out 250ms forwards;
+  }
+
+  .hero-intro {
+    animation: enter-up 650ms ease-out both;
+  }
+
+  .hero-picture {
+    animation: enter-up 750ms 100ms ease-out both;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 550ms ease,
+      transform 550ms ease;
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-intro,
+    .hero-picture {
+      animation: none;
+    }
+
+    .chart-line {
+      animation: none;
+      stroke-dashoffset: 0;
+    }
+
+    .reveal,
+    .reveal.is-visible {
+      opacity: 1;
+      transform: none;
+      transition: none;
     }
   }
 }

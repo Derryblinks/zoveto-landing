@@ -1,64 +1,35 @@
 import type { Audience } from "./types";
+import { Building2, PawPrint, Stethoscope, Tractor } from "lucide-react";
 
 export const audiences: Audience[] = [
   {
     role: "farmer",
     title: "For farmers",
-    description:
-      "Large buttons, short forms and clear steps. Register your herd, request a visit and get reminders.",
+    description: "Keep herd records, request a farm visit and stay on top of upcoming care.",
     cta: "Join as a farmer",
-    preview: {
-      title: "My herd",
-      rows: [
-        { label: "Cattle group A", tag: { text: "Vaccinated", tone: "ok" } },
-        { label: "Goats", tag: { text: "Deworming due", tone: "warn" } },
-        { label: "Next vet visit", tag: { text: "Booked", tone: "info" } },
-      ],
-    },
+    icon: Tractor,
   },
   {
     role: "keeper",
     title: "For animal keepers",
-    description:
-      "Keep a profile for every animal, search vets near you and manage bookings in one place.",
-    cta: "Join as a keeper",
-    preview: {
-      title: "My animals",
-      rows: [
-        { label: "Dog profile", tag: { text: "Up to date", tone: "ok" } },
-        { label: "Cat profile", tag: { text: "Booster due", tone: "warn" } },
-        { label: "Booking history", tag: { text: "View", tone: "info" } },
-      ],
-    },
+    description: "Keep a record for each pet and find veterinary care when you need it.",
+    cta: "Join as an animal keeper",
+    icon: PawPrint,
   },
   {
     role: "vet",
     title: "For veterinary professionals",
     description:
-      "Manage appointments, clinical records, medicine stock and invoices, even without a signal.",
+      "Organise client records, appointment requests, medicine stock and invoices. Offline access is planned.",
     cta: "Join as a vet",
-    preview: {
-      title: "Booking requests",
-      rows: [
-        { label: "Farm visit", tag: { text: "New", tone: "info" } },
-        { label: "Clinic consultation", tag: { text: "Accepted", tone: "ok" } },
-        { label: "Record saved offline", tag: { text: "Pending sync", tone: "warn" } },
-      ],
-    },
+    icon: Stethoscope,
   },
   {
     role: "pharmacy",
     title: "For pharmacies",
     description:
-      "List your catalogue, track batches and expiry dates, and manage orders from vets and farmers.",
+      "Share product information and keep track of stock, batches and expiry dates. The pharmacy directory is planned.",
     cta: "Register a pharmacy",
-    preview: {
-      title: "Inventory",
-      rows: [
-        { label: "Dewormer, in stock", tag: { text: "In stock", tone: "ok" } },
-        { label: "Vaccine, near expiry", tag: { text: "Expiring", tone: "warn" } },
-        { label: "Order awaiting reply", tag: { text: "New order", tone: "info" } },
-      ],
-    },
+    icon: Building2,
   },
 ];

@@ -8,17 +8,18 @@ export function Footer() {
       <Container className="grid gap-10 md:grid-cols-[1.2fr_1fr_1.6fr]">
         <div>
           <a href="#top" aria-label="ZOVETO home">
-            <Logo />
+            <Logo inverse />
           </a>
           <p className="mt-3 max-w-[40ch]">
-            Connecting animal owners, veterinary professionals and pharmacies across Ghana.
+            ZOVETO is being developed for animal owners, veterinary professionals and pharmacies in
+            Ghana.
           </p>
         </div>
         <nav aria-label="Footer">
           <ul className="space-y-2">
             {navigation.map((item) => (
               <li key={item.href}>
-                <a href={item.href} className="hover:text-lime">
+                <a href={item.href} className="hover:text-cream">
                   {item.label}
                 </a>
               </li>
@@ -26,8 +27,9 @@ export function Footer() {
           </ul>
         </nav>
         <p className="max-w-[60ch]">
-          ZOVETO supports professional decisions and does not diagnose or prescribe. It does not
-          replace official disease reporting to the relevant authorities.
+          Features on this page are still in development and may not be available yet. ZOVETO is
+          intended to support record-keeping and connections, not diagnose or prescribe. It does not
+          replace official disease reporting.
         </p>
       </Container>
       <Container className="mt-10 border-t border-white/10 pt-6">
