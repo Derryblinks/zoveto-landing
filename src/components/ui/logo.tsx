@@ -3,11 +3,11 @@ import { cn } from "@/lib/cn";
 export function LogoMark({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 32 32" aria-hidden="true" className={cn("size-8", className)}>
-      <rect width="32" height="32" rx="8" fill="#B6F23B" />
+      <rect width="32" height="32" rx="8" fill="#8FD9C3" />
       <path
         d="M9 10h14L9 22h14"
         fill="none"
-        stroke="#07351F"
+        stroke="#123B35"
         strokeWidth="3"
         strokeLinecap="round"
         strokeLinejoin="round"

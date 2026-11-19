@@ -9,7 +9,7 @@ export const faq: FaqEntry[] = [
   {
     question: "Does it cost anything to sign up?",
     answer:
-      "No. Registration is free for every role. Vets can later choose a paid monthly plan for extra features.",
+      "Farmers and animal keepers can register for free, and vets can start on a free plan and later choose a paid monthly plan for extra features. Pharmacy terms will be announced before launch.",
   },
   {
     question: "How do I know a vet is verified?",
@@ -19,7 +19,7 @@ export const faq: FaqEntry[] = [
   {
     question: "Can I use it with a poor connection?",
     answer:
-      "Veterinary professionals can record and view clinical records offline. Records sync automatically when the connection returns.",
+      "Offline use is planned for veterinary professionals, who will be able to register clients and animals, write clinical notes and view records they have already synced without a connection. Changes will sync automatically when it returns. Other features, such as booking and ordering, need a connection.",
   },
   {
     question: "Who can see my animals’ health records?",
@@ -28,7 +28,8 @@ export const faq: FaqEntry[] = [
   },
   {
     question: "Can I buy any medicine here?",
-    answer: "No. Prescription-only and restricted medicines require professional authorisation.",
+    answer:
+      "Pharmacy ordering is planned. Even then, prescription-only and restricted medicines will require professional authorisation.",
   },
   {
     question: "Does ZOVETO diagnose my animal?",

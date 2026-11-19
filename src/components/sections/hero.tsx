@@ -1,49 +1,56 @@
+import { ArrowRight, Check } from "lucide-react";
 import { loginLink, registerLink } from "@/config/site";
 import { hero } from "@/content";
-import { ButtonLink } from "@/components/ui/button";
-import { Container } from "@/components/ui/container";
 import { DashboardMock } from "@/components/mockups/dashboard-mock";
 import { PhoneMock } from "@/components/mockups/phone-mock";
+import { ButtonLink } from "@/components/ui/button";
+import { Container } from "@/components/ui/container";
 
 export function Hero() {
   return (
     <section
       id="top"
       aria-labelledby="hero-title"
-      className="bg-deep overflow-hidden pt-16 text-center"
+      className="bg-deep relative overflow-hidden pt-16 pb-14 text-center"
     >
-      <Container>
-        <p className="text-on-deep mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 px-3.5 py-1 text-[13px]">
-          <b className="bg-lime text-deep rounded-full px-2.5 py-px text-xs font-semibold">
-            {hero.badge.highlight}
-          </b>
-          {hero.badge.text}
+      <Container className="relative">
+        <p className="text-mint kicker kicker-center mb-5 text-[13px] font-semibold tracking-wider uppercase">
+          {hero.kicker}
         </p>
         <h1
           id="hero-title"
-          className="mx-auto max-w-[16ch] text-[clamp(2.4rem,6vw,4.4rem)] leading-[1.05] text-white"
+          className="mx-auto max-w-[18ch] text-[clamp(2.4rem,6vw,4.4rem)] leading-[1.05] text-white"
         >
           {hero.title}
         </h1>
         <p className="text-on-deep-muted mx-auto mt-6 max-w-[58ch] text-lg">{hero.description}</p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <ButtonLink href={registerLink()} variant="lime">
+          <ButtonLink href={registerLink()} variant="mint" size="lg">
             Create account
+            <ArrowRight
+              className="size-5 transition-transform duration-200 group-hover/btn:translate-x-1"
+              aria-hidden="true"
+            />
           </ButtonLink>
-          <ButtonLink href={loginLink()} variant="outline-light">
+          <ButtonLink href={loginLink()} variant="outline-light" size="lg">
             Log in
           </ButtonLink>
         </div>
-        <p className="text-on-deep-muted mt-4 text-sm">{hero.note}</p>
+        <p className="text-on-deep-muted mt-4 inline-flex items-center gap-2 text-sm">
+          <Check className="text-mint size-4" aria-hidden="true" />
+          {hero.note}
+        </p>
       </Container>
 
-      <div className="relative mx-auto mt-14 h-[360px] max-w-[980px] overflow-hidden px-4 sm:h-[400px]">
-        <DashboardMock />
-        <PhoneMock className="absolute top-[70px] right-[2%] hidden sm:block" />
-        <p className="absolute inset-x-0 bottom-11 z-10 text-xs text-[#7b9285]">
-          Illustration with sample entries
-        </p>
+      <div className="relative mx-auto mt-14 max-w-[1040px] px-4">
+        <div className="relative h-[360px] overflow-hidden sm:h-[400px]">
+          <DashboardMock />
+          <PhoneMock className="absolute top-[70px] right-[2%] hidden sm:block" />
+        </div>
       </div>
+      <p className="text-on-deep-muted relative mt-4 text-sm">
+        Illustration with sample entries. Not real records or live figures.
+      </p>
     </section>
   );
 }

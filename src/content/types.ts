@@ -22,12 +22,13 @@ export interface Audience {
   preview: { title: string; rows: PreviewRow[] };
 }
 
+/** The first feature in the list is shown large; the rest are listed beneath it. */
 export interface Feature {
   title: string;
   description: string;
   icon: LucideIcon;
-  /** Spans two columns on wide screens. */
-  wide?: boolean;
+  /** True while the feature is described but not available yet. Shows a "Planned" tag. */
+  planned?: boolean;
   preview: { kind: "rows"; rows: PreviewRow[] } | { kind: "meter"; label: string; percent: number };
 }
 
@@ -35,6 +36,8 @@ export interface ToolColumn {
   title: string;
   description: string;
   icon: LucideIcon;
+  /** True while the tool is described but not available yet. Shows a "Planned" tag. */
+  planned?: boolean;
   points: string[];
 }
 

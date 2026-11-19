@@ -10,9 +10,13 @@ import { FinalCta } from "@/components/sections/final-cta";
 import { Hero } from "@/components/sections/hero";
 import { Plans } from "@/components/sections/plans";
 import { TrustStrip } from "@/components/sections/trust-strip";
+import { useReveal } from "@/hooks/use-reveal";
 
 /** The landing page. Sections are independent, so they can be reordered or removed freely. */
 export function App() {
+  // Fades sections in as they scroll into view (elements marked with `data-reveal`).
+  useReveal();
+
   return (
     <>
       <SkipLink />
