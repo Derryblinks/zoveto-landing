@@ -5,14 +5,14 @@ export const audiences: Audience[] = [
     role: "farmer",
     title: "For farmers",
     description:
-      "Large buttons, short forms and clear steps. Register your herd, request a visit and get reminders.",
+      "Large buttons, short forms and clear steps. Register your herd and request a visit. Health reminders are planned.",
     cta: "Join as a farmer",
     preview: {
       title: "My herd",
       rows: [
         { label: "Cattle group A", tag: { text: "Vaccinated", tone: "ok" } },
         { label: "Goats", tag: { text: "Deworming due", tone: "warn" } },
-        { label: "Next vet visit", tag: { text: "Booked", tone: "info" } },
+        { label: "Next vet visit", tag: { text: "Confirmed", tone: "info" } },
       ],
     },
   },
@@ -27,7 +27,7 @@ export const audiences: Audience[] = [
       rows: [
         { label: "Dog profile", tag: { text: "Up to date", tone: "ok" } },
         { label: "Cat profile", tag: { text: "Booster due", tone: "warn" } },
-        { label: "Booking history", tag: { text: "View", tone: "info" } },
+        { label: "Vet appointment", tag: { text: "Requested", tone: "info" } },
       ],
     },
   },
@@ -35,14 +35,14 @@ export const audiences: Audience[] = [
     role: "vet",
     title: "For veterinary professionals",
     description:
-      "Manage appointments, clinical records, medicine stock and invoices, even without a signal.",
+      "Manage your profile and appointment requests. Clinical records, medicine stock, invoices and offline notes are planned.",
     cta: "Join as a vet",
     preview: {
       title: "Booking requests",
       rows: [
-        { label: "Farm visit", tag: { text: "New", tone: "info" } },
+        { label: "Farm visit", tag: { text: "Requested", tone: "info" } },
         { label: "Clinic consultation", tag: { text: "Accepted", tone: "ok" } },
-        { label: "Record saved offline", tag: { text: "Pending sync", tone: "warn" } },
+        { label: "Record saved offline", tag: { text: "Pending Sync", tone: "warn" } },
       ],
     },
   },
@@ -50,14 +50,14 @@ export const audiences: Audience[] = [
     role: "pharmacy",
     title: "For pharmacies",
     description:
-      "List your catalogue, track batches and expiry dates, and manage orders from vets and farmers.",
+      "Planned: list your catalogue, track batches and expiry dates, and manage orders from vets and farmers. Pharmacy accounts are reviewed before listing.",
     cta: "Register a pharmacy",
     preview: {
       title: "Inventory",
       rows: [
         { label: "Dewormer, in stock", tag: { text: "In stock", tone: "ok" } },
-        { label: "Vaccine, near expiry", tag: { text: "Expiring", tone: "warn" } },
-        { label: "Order awaiting reply", tag: { text: "New order", tone: "info" } },
+        { label: "Vaccine, near expiry", tag: { text: "Near expiry", tone: "warn" } },
+        { label: "Order awaiting reply", tag: { text: "Received", tone: "info" } },
       ],
     },
   },

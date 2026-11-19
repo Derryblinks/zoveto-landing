@@ -2,17 +2,19 @@ import { FileText, Lock, ShieldCheck, Smartphone, WifiOff } from "lucide-react";
 import type { TrustPoint } from "./types";
 
 export const hero = {
-  badge: { highlight: "Made in Ghana", text: "For animal owners, vets and pharmacies" },
-  title: "Veterinary care, connected across Ghana.",
+  /** Says what the product is, in plain words, before the headline says what it does. */
+  kicker: "Veterinary platform for Ghana",
+  /** One specific outcome. */
+  title: "Find a verified vet and book a visit.",
   description:
-    "Find a verified vet, book a farm visit, keep animal health records and source medicines. One platform for farmers, animal keepers, veterinary professionals and pharmacies.",
-  note: "Free to join for every role.",
+    "Find verified vets and book a farm visit or clinic consultation. Animal health records and vaccination reminders are planned. Built for farmers, animal keepers, vets and pharmacies.",
+  note: "Free to start for farmers, animal keepers and vets.",
 } as const;
 
 export const trustPoints: TrustPoint[] = [
   { label: "Verified professionals", icon: ShieldCheck },
-  { label: "Works offline in the field", icon: WifiOff },
-  { label: "Mobile Money payments", icon: Smartphone },
+  { label: "Offline vet records (planned)", icon: WifiOff },
+  { label: "Simple on a phone", icon: Smartphone },
   { label: "Private by role", icon: Lock },
   { label: "No AI diagnosis", icon: FileText },
 ];

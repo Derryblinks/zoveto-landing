@@ -10,8 +10,8 @@ export const features: Feature[] = [
     preview: {
       kind: "rows",
       rows: [
-        { label: "Request sent", tag: { text: "Pending", tone: "info" } },
-        { label: "Vet replied", tag: { text: "Accepted", tone: "ok" } },
+        { label: "Farm visit", tag: { text: "Requested", tone: "info" } },
+        { label: "Vet reply", tag: { text: "Accepted", tone: "ok" } },
       ],
     },
   },
@@ -20,6 +20,7 @@ export const features: Feature[] = [
     description:
       "Vaccinations, treatments, allergies and lab results kept in one profile for each animal.",
     icon: PawPrint,
+    planned: true,
     preview: {
       kind: "rows",
       rows: [
@@ -33,11 +34,12 @@ export const features: Feature[] = [
     description:
       "Vaccination, deworming and follow-up reminders reach owners and vets before deadlines pass.",
     icon: BellRing,
+    planned: true,
     preview: {
       kind: "rows",
       rows: [
         { label: "Deworming due", tag: { text: "This week", tone: "warn" } },
-        { label: "Follow-up visit", tag: { text: "Scheduled", tone: "info" } },
+        { label: "Follow-up visit", tag: { text: "Confirmed", tone: "info" } },
       ],
     },
   },
@@ -46,15 +48,15 @@ export const features: Feature[] = [
     description:
       "Browse veterinary products, check availability and send orders or enquiries. Restricted medicines need professional authorisation.",
     icon: Pill,
-    wide: true,
+    planned: true,
     preview: { kind: "meter", label: "Stock level", percent: 72 },
   },
   {
     title: "Finance in view",
     description:
-      "Consultation charges, invoices, payments, expenses and outstanding balances tracked for every client.",
+      "Consultation charges, invoices, payment records and outstanding balances tracked for each client, where billing is enabled.",
     icon: Wallet,
-    wide: true,
+    planned: true,
     preview: {
       kind: "rows",
       rows: [
