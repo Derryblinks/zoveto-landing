@@ -1,7 +1,7 @@
 const SLICES = [
-  { label: "Cattle", percent: 52, color: "#087a3b" },
-  { label: "Goats and sheep", percent: 28, color: "#b6f23b" },
-  { label: "Poultry", percent: 20, color: "#f0a21b" },
+  { label: "Cattle", percent: 52, color: "#123b35" },
+  { label: "Goats and sheep", percent: 28, color: "#167c6a" },
+  { label: "Poultry", percent: 20, color: "#8fd9c3" },
 ] as const;
 
 /** Donut chart drawn with a conic gradient. Sample data for the illustration only. */
