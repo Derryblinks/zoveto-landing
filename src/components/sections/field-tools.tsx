@@ -3,6 +3,7 @@ import { toolColumns } from "@/content";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { PlannedTag } from "@/components/ui/planned-tag";
 
 export function FieldTools() {
   return (
@@ -22,11 +23,14 @@ export function FieldTools() {
             {toolColumns.map((column, index) => (
               <li key={column.title} className="h-full">
                 <Reveal delay={index * 70}>
-                  <div className="border-line bg-card h-full rounded-2xl border p-6 transition-shadow duration-300 hover:shadow-md">
+                  <div className="border-line bg-card h-full rounded-2xl border p-6 transition-shadow duration-300 hover:shadow-sm">
                     <span className="bg-cream text-deep grid size-10 place-items-center rounded-xl">
                       <column.icon className="size-5" aria-hidden="true" />
                     </span>
-                    <h3 className="mt-3.5 mb-2 text-xl">{column.title}</h3>
+                    <div className="mt-3.5 mb-2 flex flex-wrap items-center gap-2">
+                      <h3 className="text-xl">{column.title}</h3>
+                      {column.planned ? <PlannedTag /> : null}
+                    </div>
                     <p className="text-[15px]">{column.description}</p>
                     <ul className="text-body mt-4 space-y-2 text-sm">
                       {column.points.map((point) => (

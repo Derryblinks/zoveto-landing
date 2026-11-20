@@ -13,6 +13,7 @@ export const toolColumns: ToolColumn[] = [
     description:
       "Offline record-keeping is planned so veterinary professionals can work through poor connections and sync when they’re back online.",
     icon: WifiOff,
+    planned: true,
     points: ["Client and animal records", "Consultation notes", "Sync when a connection returns"],
   },
   {

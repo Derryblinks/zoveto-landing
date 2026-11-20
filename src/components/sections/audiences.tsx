@@ -19,7 +19,7 @@ export function Audiences() {
         <div className="mt-12 grid gap-4 sm:grid-cols-2">
           {audiences.map((audience) => (
             <Reveal key={audience.role} delay={audiences.indexOf(audience) * 70}>
-              <article className="border-line bg-card flex min-h-[240px] flex-col items-start rounded-2xl border p-6 transition-shadow duration-300 hover:shadow-md sm:p-7">
+              <article className="border-line bg-card flex min-h-[240px] flex-col items-start rounded-2xl border p-6 transition-shadow duration-300 hover:shadow-sm sm:p-7">
                 <span className="bg-surface text-forest mb-4 grid size-11 place-items-center rounded-xl">
                   <audience.icon className="size-[22px]" aria-hidden="true" />
                 </span>

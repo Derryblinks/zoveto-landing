@@ -18,7 +18,7 @@ export function ThemeToggle({ className }: { className?: string }) {
       aria-label={`Switch to ${next} mode`}
       title={`Switch to ${next} mode`}
       className={cn(
-        "theme-toggle glass relative grid size-10 shrink-0 place-items-center rounded-full text-white transition-colors duration-200 hover:bg-white/20",
+        "theme-toggle border-line text-ink hover:bg-surface relative grid size-10 shrink-0 place-items-center rounded-full border transition-colors duration-200",
         className,
       )}
     >

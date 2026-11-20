@@ -39,10 +39,12 @@ export function HowItWorks() {
               <Reveal delay={index * 90}>
                 <div className="border-line relative h-full border-t pt-6">
                   <div className="mb-5 flex items-center justify-between">
-                    <span className="bg-sage/35 text-forest grid size-11 place-items-center rounded-lg">
+                    <span className="bg-sage/35 text-forest dark:bg-deep-2 dark:text-mint grid size-11 place-items-center rounded-lg">
                       <step.icon className="size-5" aria-hidden="true" />
                     </span>
-                    <span className="text-muted font-display text-sm font-semibold">0{index + 1}</span>
+                    <span className="text-muted font-display text-sm font-semibold">
+                      0{index + 1}
+                    </span>
                   </div>
                   <h3 className="text-lg">{step.title}</h3>
                   <p className="mt-2 text-[15px]">{step.description}</p>

@@ -25,6 +25,7 @@ export interface ToolColumn {
   description: string;
   icon: LucideIcon;
   points: string[];
+  planned?: boolean;
 }
 
 export interface Fact {

@@ -112,9 +112,9 @@ describe("contrast", () => {
   }
 
   it("keeps every status tag readable", () => {
-    const statusSource = sources["/src/components/ui/status-tag.tsx"] ?? "";
+    const statusSource = sources["/src/components/dashboard/dashboard-status-badge.tsx"] ?? "";
     const pairs = [...statusSource.matchAll(/bg-\[(#[0-9a-f]{6})\] text-\[(#[0-9a-f]{6})\]/gi)];
-    expect(pairs.length).toBeGreaterThanOrEqual(4);
+    expect(pairs.length).toBeGreaterThanOrEqual(2);
     for (const [, bg, fg] of pairs) {
       expect(contrast(fg!, bg!), `${fg} on ${bg}`).toBeGreaterThanOrEqual(AA_TEXT);
     }

@@ -85,7 +85,7 @@ export function AuthPage({
   };
 
   return (
-    <main className="bg-surface flex min-h-screen flex-col px-4 py-6 sm:px-6 sm:py-10">
+    <main className="app-light-theme bg-surface flex min-h-screen flex-col px-4 py-6 sm:px-6 sm:py-10">
       <div className="mx-auto flex w-full max-w-[1080px] items-center justify-between">
         <a href="/" aria-label="ZOVETO home">
           <Logo />

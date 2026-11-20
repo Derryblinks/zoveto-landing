@@ -1,6 +1,12 @@
 import { navigation } from "@/content";
 import { Container } from "@/components/ui/container";
 import { Logo } from "@/components/ui/logo";
+import { resolveLegal } from "@/config/legal";
+
+const legal = resolveLegal(import.meta.env);
+
+const toSentenceList = (items: string[]) =>
+  items.length < 2 ? items.join("") : `${items.slice(0, -1).join(", ")} and ${items.at(-1)}`;
 
 export function Footer() {
   return (
@@ -25,6 +31,25 @@ export function Footer() {
               </li>
             ))}
           </ul>
+          {legal.links.length > 0 ? (
+            <ul aria-label="Legal and contact" className="mt-5 space-y-2">
+              {legal.links.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="hover:text-cream underline-offset-4 hover:underline"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          ) : null}
+          {legal.missing.length > 0 ? (
+            <p className="mt-5 max-w-[34ch]">
+              Not yet published: {toSentenceList(legal.missing)}. These will be added before launch.
+            </p>
+          ) : null}
         </nav>
         <p className="max-w-[60ch]">
           Features on this page are still in development and may not be available yet. ZOVETO is

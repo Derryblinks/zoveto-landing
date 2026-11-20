@@ -113,7 +113,7 @@ export function App() {
 
 function RouteMessage({ message, action }: { message: string; action?: ReactNode }) {
   return (
-    <main className="bg-surface grid min-h-screen place-items-center px-6 py-12">
+    <main className="app-light-theme bg-surface grid min-h-screen place-items-center px-6 py-12">
       <div className="border-line w-full max-w-lg rounded-2xl border bg-white p-8 text-center">
         <h1 className="text-2xl">Let’s get you back on track</h1>
         <p className="text-muted mt-3">{message}</p>

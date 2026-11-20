@@ -614,7 +614,7 @@ function AppointmentTable({
                         Cancel request
                       </button>
                     ) : (
-                      <span className="text-muted text-xs">—</span>
+                      <span className="text-muted text-xs">Not provided</span>
                     )}
                   </td>
                 </tr>
@@ -1051,7 +1051,7 @@ function TasksPage({
                     checked={task.complete}
                     onChange={() => toggleTask(task)}
                     aria-label={`${task.complete ? "Reopen" : "Complete"} ${task.title}`}
-                    className="accent-[#416428]"
+                    className="accent-[#167c6a]"
                   />
                   <span className="min-w-0 flex-1">
                     <span
@@ -1328,7 +1328,7 @@ function InventoryPage({
                 />
               </label>
               <label className="text-body flex items-center gap-2 text-sm sm:col-span-2 lg:col-span-3">
-                <input type="checkbox" name="restricted" className="accent-[#416428]" />
+                <input type="checkbox" name="restricted" className="accent-[#167c6a]" />
                 Requires professional authorisation
               </label>
               <Button type="submit" variant="primary" className="sm:col-span-2 lg:col-span-3">
@@ -1667,7 +1667,7 @@ function OrdersPage({
                           Mark ready
                         </button>
                       ) : (
-                        <span className="text-muted text-xs">—</span>
+                        <span className="text-muted text-xs">Not provided</span>
                       )}
                     </td>
                   </tr>

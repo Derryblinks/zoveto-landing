@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
-import { cn } from "@/lib/cn";
+import type { ReactNode } from "react";
+import { reveal } from "@/lib/reveal";
 
 export function Reveal({
   children,
@@ -10,39 +10,8 @@ export function Reveal({
   className?: string;
   delay?: number;
 }) {
-  const element = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(() => {
-    if (typeof window === "undefined") return true;
-    return (
-      typeof IntersectionObserver === "undefined" ||
-      (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false)
-    );
-  });
-
-  useEffect(() => {
-    const node = element.current;
-    if (!node) return;
-    if (visible || typeof IntersectionObserver === "undefined") return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: "0px 0px -48px 0px", threshold: 0.08 },
-    );
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, [visible]);
-
   return (
-    <div
-      ref={element}
-      className={cn("reveal", visible && "is-visible", className)}
-      style={{ "--reveal-delay": `${delay}ms` } as CSSProperties}
-    >
+    <div {...reveal(delay ? 1 : 0, delay)} className={className}>
       {children}
     </div>
   );

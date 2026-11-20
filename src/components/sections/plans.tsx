@@ -26,7 +26,9 @@ export function Plans() {
                 <div
                   className={cn(
                     "flex h-full flex-col rounded-[22px] border p-8",
-                    plan.highlighted ? "border-forest bg-forest text-white" : "border-line bg-card",
+                    plan.highlighted
+                      ? "border-forest bg-forest dark:border-deep dark:bg-deep text-white"
+                      : "border-line bg-card",
                   )}
                 >
                   <h3 className={cn("text-xl", plan.highlighted && "text-white")}>{plan.name}</h3>

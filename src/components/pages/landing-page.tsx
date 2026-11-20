@@ -11,8 +11,11 @@ import { Hero } from "@/components/sections/hero";
 import { HowItWorks } from "@/components/sections/how-it-works";
 import { Plans } from "@/components/sections/plans";
 import { TrustStrip } from "@/components/sections/trust-strip";
+import { useReveal } from "@/hooks/use-reveal";
 
 export function LandingPage() {
+  useReveal();
+
   return (
     <>
       <SkipLink />

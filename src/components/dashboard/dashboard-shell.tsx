@@ -34,7 +34,7 @@ function NavigationList({
           className={[
             "flex min-h-11 items-center gap-3 rounded-lg px-3 text-sm font-medium transition-colors",
             page === item.id
-              ? "bg-[#edf4e7] text-forest"
+              ? "text-forest bg-[#edf4e7]"
               : "text-body hover:bg-surface hover:text-ink",
           ].join(" ")}
         >
@@ -75,7 +75,7 @@ export function DashboardShell({
   };
 
   return (
-    <div className="min-h-screen bg-surface">
+    <div className="app-light-theme bg-surface min-h-screen">
       <aside className="border-line fixed inset-y-0 left-0 z-30 hidden w-[252px] flex-col border-r bg-white px-4 py-5 md:flex">
         <AppLink href="/" aria-label="ZOVETO home" className="mb-8 px-2">
           <Logo />
@@ -91,11 +91,7 @@ export function DashboardShell({
               Sample data is saved in this browser only.
             </p>
           </div>
-          <Button
-            variant="outline"
-            className="mt-3 w-full justify-start"
-            onClick={logout}
-          >
+          <Button variant="outline" className="mt-3 w-full justify-start" onClick={logout}>
             <LogOut className="size-4" aria-hidden="true" />
             Sign out
           </Button>
@@ -103,14 +99,14 @@ export function DashboardShell({
       </aside>
 
       <div className="md:ml-[252px]">
-        <header className="border-line bg-white sticky top-0 z-20 border-b">
+        <header className="border-line sticky top-0 z-20 border-b bg-white">
           <div className="flex min-h-[72px] items-center gap-3 px-4 sm:px-7">
             <button
               type="button"
               aria-label={mobileMenuOpen ? "Close workspace menu" : "Open workspace menu"}
               aria-expanded={mobileMenuOpen}
               onClick={() => setMobileMenuOpen((open) => !open)}
-              className="text-ink grid size-10 shrink-0 place-items-center rounded-lg border border-line md:hidden"
+              className="text-ink border-line grid size-10 shrink-0 place-items-center rounded-lg border md:hidden"
             >
               {mobileMenuOpen ? (
                 <X className="size-5" aria-hidden="true" />
@@ -127,7 +123,7 @@ export function DashboardShell({
                   value={search}
                   onChange={(event) => onSearch(event.target.value)}
                   placeholder="Search this page…"
-                  className="text-ink min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-muted"
+                  className="text-ink placeholder:text-muted min-w-0 flex-1 bg-transparent text-sm outline-none"
                 />
               </label>
             </div>
@@ -152,7 +148,7 @@ export function DashboardShell({
                   <div
                     id="notification-panel"
                     aria-label="Notifications"
-                    className="border-line absolute top-12 right-0 z-40 w-[min(340px,calc(100vw-2rem))] rounded-xl border bg-white p-4 shadow-lg"
+                    className="border-line absolute top-12 right-0 z-40 w-[min(340px,calc(100vw-2rem))] rounded-xl border bg-white p-4 shadow-sm"
                   >
                     <div className="flex items-center justify-between gap-3">
                       <h2 className="text-base">Notifications</h2>
@@ -167,10 +163,7 @@ export function DashboardShell({
                     <ul className="mt-3 space-y-2">
                       {notifications.length ? (
                         notifications.slice(0, 5).map((notification) => (
-                          <li
-                            key={notification.id}
-                            className="border-line rounded-lg border p-3"
-                          >
+                          <li key={notification.id} className="border-line rounded-lg border p-3">
                             <p className="text-sm font-semibold">{notification.title}</p>
                             <p className="text-muted mt-0.5 text-xs">{notification.detail}</p>
                           </li>
@@ -192,9 +185,7 @@ export function DashboardShell({
                   {session.name.slice(0, 1).toUpperCase()}
                 </span>
                 <div className="hidden min-w-0 lg:block">
-                  <p className="text-ink max-w-36 truncate text-sm font-semibold">
-                    {session.name}
-                  </p>
+                  <p className="text-ink max-w-36 truncate text-sm font-semibold">{session.name}</p>
                   <p className="text-muted text-xs">{ROLE_LABELS[role]}</p>
                 </div>
               </div>
@@ -209,7 +200,7 @@ export function DashboardShell({
             </div>
           </div>
           <div className="border-line border-t px-4 py-2 sm:hidden">
-            <label className="bg-bg flex h-10 items-center gap-2 rounded-lg border border-line px-3">
+            <label className="bg-bg border-line flex h-10 items-center gap-2 rounded-lg border px-3">
               <Search className="text-muted size-4" aria-hidden="true" />
               <span className="sr-only">Search this page</span>
               <input
@@ -226,16 +217,8 @@ export function DashboardShell({
               <p className="text-muted mb-2 px-3 text-xs font-semibold uppercase">
                 {ROLE_LABELS[role]}
               </p>
-              <NavigationList
-                role={role}
-                page={page}
-                onNavigate={() => setMobileMenuOpen(false)}
-              />
-              <Button
-                variant="outline"
-                onClick={logout}
-                className="mt-3 w-full justify-start"
-              >
+              <NavigationList role={role} page={page} onNavigate={() => setMobileMenuOpen(false)} />
+              <Button variant="outline" onClick={logout} className="mt-3 w-full justify-start">
                 <LogOut className="size-4" aria-hidden="true" />
                 Sign out
               </Button>
@@ -245,7 +228,7 @@ export function DashboardShell({
 
         <main id="dashboard-main" className="mx-auto max-w-[1450px] px-4 py-6 sm:px-7 sm:py-8">
           <div className="bg-cream/60 text-deep mb-6 flex items-start gap-2 rounded-lg px-3.5 py-2.5 text-xs sm:items-center sm:text-sm">
-            <span className="mt-1 size-2 shrink-0 rounded-full bg-forest sm:mt-0" />
+            <span className="bg-forest mt-1 size-2 shrink-0 rounded-full sm:mt-0" />
             <p>
               Demo workspace · Sample data saved on this device only. This is not a secure account
               or a live veterinary record system.

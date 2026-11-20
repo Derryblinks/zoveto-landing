@@ -44,8 +44,8 @@ src/
   auth/             Browser-only demo session (no password storage)
   content/          All copy and data, typed. Edit text here, not in components.
   config/           Site constants and link builders (appLink, loginLink, registerLink)
-  hooks/            Reusable hooks (useDisclosure)
-  lib/              Small utilities (cn)
+  hooks/            Reusable hooks for navigation, motion and local data
+  lib/              Small utilities for routes, themes and CSS classes
   styles/           Tailwind entry and design tokens
   test/             Test setup
 tests/              Unit and component tests
@@ -56,8 +56,10 @@ public/             Favicon, robots.txt and local images
 
 - **Content is separate from presentation.** Sections read from `src/content/*`, which is typed (`types.ts`). To change wording, plans, FAQ or navigation, edit those files.
 - **One section, one file.** Sections are independent. Reorder or remove them in `src/app/app.tsx`.
-- **Design tokens live in `src/styles/index.css`.** Use semantic utilities (`bg-surface`, `text-ink`, `text-muted`, `border-line`, `bg-deep`, `bg-forest`, `bg-sage`, `bg-cream`). The palette is based on forest green, sage, tan and cream.
+- **Design tokens live in `src/styles/index.css`.** Use semantic utilities (`bg-surface`, `text-ink`, `text-muted`, `border-line`, `bg-deep`, `bg-forest`, `bg-sage`, `bg-cream`). The main palette uses deep green `#123B35`, teal `#167C6A` and grey `#646E73`, with warm light surfaces.
+- **Theme:** the landing page follows the saved or system light/dark preference. The sign-in and demo workspaces stay light for consistent readability.
 - **Links into the app go through `src/config/site.ts`**, never hard-coded.
+- **Legal links:** set `VITE_PRIVACY_URL`, `VITE_TERMS_URL` and `VITE_SUPPORT_EMAIL` to show published policies and support contact in the footer. Missing links are identified as unpublished.
 - **Demo limits:** Sign-in only creates a browser-local demo session. Sample data is stored in this browser's `localStorage`; it is not secure, shared with a server, or synchronized across devices. No real authentication, clinical records, payments, pharmacy orders, or notifications are provided.
 - **Path alias:** `@/` points to `src/`.
 
@@ -71,7 +73,7 @@ public/             Favicon, robots.txt and local images
 - The page describes a product in development. Pharmacy listings, offline access, Mobile Money payments and paid plans are identified as planned features rather than available today. Update `src/content` as their status changes.
 - Plan prices are intentionally absent. Add them in `src/content/plans.ts` when decided.
 - The hero photograph is stored locally in `public/images/veterinary-care.jpg`.
-- The footer has no legal links. Add Terms and Privacy pages and link them from `src/components/layout/footer.tsx`.
+- Configure legal links before launch. The footer will not invent policy URLs or a support address.
 
 ## Deploying
 

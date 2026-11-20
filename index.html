@@ -9,6 +9,22 @@
       content="ZOVETO is being developed to help farmers, animal owners, veterinary professionals and pharmacies stay connected and keep animal health records in Ghana."
     />
     <meta name="theme-color" content="#FBF0BA" />
+    <script>
+      try {
+        const savedTheme = localStorage.getItem("zoveto-theme");
+        const theme =
+          savedTheme === "light" || savedTheme === "dark"
+            ? savedTheme
+            : matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light";
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+      } catch {
+        document.documentElement.dataset.theme = "light";
+        document.documentElement.style.colorScheme = "light";
+      }
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="ZOVETO | Animal care and veterinary services in Ghana" />

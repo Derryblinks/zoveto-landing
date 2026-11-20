@@ -235,12 +235,12 @@ function ActivityChart({ data, role }: { data: DemoWorkspace; role: DemoRole }) 
         className="mt-4 h-[150px] w-full overflow-visible"
       >
         {[30, 70, 110].map((y) => (
-          <line key={y} x1="20" x2="350" y1={y} y2={y} stroke="#e4e1d4" strokeDasharray="3 5" />
+          <line key={y} x1="20" x2="350" y1={y} y2={y} stroke="#dce8e5" strokeDasharray="3 5" />
         ))}
         <polyline
           points={points}
           fill="none"
-          stroke="#416428"
+          stroke="#167c6a"
           strokeWidth="3"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -251,7 +251,7 @@ function ActivityChart({ data, role }: { data: DemoWorkspace; role: DemoRole }) 
           const y = 116 - (month.count / max) * 86;
           return (
             <g key={month.key}>
-              <circle cx={x} cy={y} r="4" fill="#416428" />
+              <circle cx={x} cy={y} r="4" fill="#167c6a" />
               <text x={x} y="145" textAnchor="middle" className="fill-muted text-[11px]">
                 {month.label}
               </text>
@@ -276,7 +276,7 @@ function StatusChart({ data, role }: { data: DemoWorkspace; role: DemoRole }) {
           {
             label: "Accepted",
             count: data.orders.filter((item) => item.status === "Accepted").length,
-            color: "#416428",
+            color: "#167c6a",
           },
           {
             label: "Ready for collection",
@@ -293,7 +293,7 @@ function StatusChart({ data, role }: { data: DemoWorkspace; role: DemoRole }) {
           {
             label: "Confirmed",
             count: appointments.filter((item) => item.status === "Confirmed").length,
-            color: "#416428",
+            color: "#167c6a",
           },
           {
             label: "Requested",
