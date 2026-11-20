@@ -21,4 +21,18 @@ describe("content integrity", () => {
   it("highlights exactly one plan", () => {
     expect(plans.filter((p) => p.highlighted)).toHaveLength(1);
   });
+
+  it("uses the product guide's status words in previews, not near-synonyms", () => {
+    // Bookings: Requested, Accepted, Reschedule Proposed, Confirmed, In Progress, Completed,
+    // Cancelled, No-show. Orders start at Received. Offline records: Pending Sync, Syncing,
+    // Synced, Sync Failed. These words stood in for them before and must not come back.
+    const offGuide = ["New", "Pending", "Booked", "Scheduled", "New order", "Pending sync"];
+    const tags = [
+      ...audiences.flatMap((a) => a.preview.rows),
+      ...features.flatMap((f) => (f.preview.kind === "rows" ? f.preview.rows : [])),
+    ].map((row) => row.tag.text);
+
+    expect(tags.length).toBeGreaterThan(5);
+    expect(tags.filter((text) => offGuide.includes(text))).toEqual([]);
+  });
 });
