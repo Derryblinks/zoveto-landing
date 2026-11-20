@@ -4,36 +4,36 @@ export const faq: FaqEntry[] = [
   {
     question: "Who can use ZOVETO?",
     answer:
-      "Livestock farmers, household animal keepers, veterinary professionals and veterinary pharmacies in Ghana. Each role has its own dashboard.",
+      "Farmers, pet owners, veterinary professionals and veterinary pharmacies in Ghana. ZOVETO is being developed with each of these groups in mind.",
   },
   {
     question: "Does it cost anything to sign up?",
     answer:
-      "Farmers and animal keepers can register for free, and vets can start on a free plan and later choose a paid monthly plan for extra features. Pharmacy terms will be announced before launch.",
+      "Registration is free. Optional paid plans for veterinary professionals are planned; details and prices will be shared before launch.",
   },
   {
-    question: "How do I know a vet is verified?",
+    question: "How will veterinary profiles be checked?",
     answer:
-      "Veterinary professionals and pharmacies are only listed after our team has reviewed their credentials.",
+      "Professional credentials will be reviewed before a profile is listed. We’ll share more about the review process when the directory is ready.",
   },
   {
-    question: "Can I use it with a poor connection?",
+    question: "Will it work with a poor internet connection?",
     answer:
-      "Offline use is planned for veterinary professionals, who will be able to register clients and animals, write clinical notes and view records they have already synced without a connection. Changes will sync automatically when it returns. Other features, such as booking and ordering, need a connection.",
+      "Offline record-keeping for veterinary professionals is planned. When it’s available, records will sync once a connection returns.",
   },
   {
-    question: "Who can see my animals’ health records?",
+    question: "Who will be able to see my animal’s health records?",
     answer:
-      "The veterinary professional who created them, and you once they choose to share them with you.",
+      "ZOVETO is being designed to let animal owners manage how they share records with veterinary professionals. Privacy details will be published before launch.",
   },
   {
-    question: "Can I buy any medicine here?",
+    question: "Will I be able to order veterinary medicines?",
     answer:
-      "Pharmacy ordering is planned. Even then, prescription-only and restricted medicines will require professional authorisation.",
+      "A veterinary products directory is planned. Prescription and restricted medicines will require any authorisation required by law.",
   },
   {
-    question: "Does ZOVETO diagnose my animal?",
+    question: "Does ZOVETO replace a veterinary professional?",
     answer:
-      "No. ZOVETO does not use AI to diagnose or recommend treatment. It helps qualified professionals keep accurate records.",
+      "No. ZOVETO is intended to help people keep records and connect with qualified professionals; it does not diagnose animals or recommend treatment.",
   },
 ];

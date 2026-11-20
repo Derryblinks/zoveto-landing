@@ -1,58 +1,40 @@
 import { ArrowRight } from "lucide-react";
 import { registerLink } from "@/config/site";
-import { audiences, roleIcons } from "@/content";
-import { reveal } from "@/lib/reveal";
-import { ButtonLink } from "@/components/ui/button";
+import { audiences } from "@/content";
+import { AppLink } from "@/components/ui/app-link";
 import { Container } from "@/components/ui/container";
-import { PreviewRows } from "@/components/ui/preview-card";
+import { Reveal } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
 
 export function Audiences() {
   return (
-    <section id="who" aria-labelledby="who-title" className="py-24">
+    <section id="who" aria-labelledby="who-title" className="py-20 sm:py-24">
       <Container>
         <SectionHeading
           id="who-title"
           kicker="Who it’s for"
-          title="A dashboard for each role"
-          description="Farmers, animal keepers, vets and pharmacies each see only what they need."
+          title="Support for every part of animal care"
+          description="ZOVETO is being developed for the people who care for animals every day."
         />
-        <div className="mt-12 grid gap-5 md:grid-cols-2">
-          {audiences.map((audience, index) => {
-            const Icon = roleIcons[audience.role];
-            const side = index % 2 === 0 ? "left" : "right";
-            return (
-              <article
-                key={audience.role}
-                {...reveal(Math.floor(index / 2), 140, side)}
-                className="group bg-deep text-on-deep flex min-h-[420px] flex-col overflow-hidden rounded-3xl px-8 pt-8 transition-transform duration-300 hover:-translate-y-1.5"
-              >
-                <Icon
-                  className="text-mint mb-4 size-7 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6"
-                  aria-hidden="true"
-                />
-                <h3 className="text-[1.65rem] text-white">{audience.title}</h3>
-                <p className="text-on-deep-muted mt-3 mb-5 max-w-[44ch]">{audience.description}</p>
-                <ButtonLink
+        <div className="mt-12 grid gap-4 sm:grid-cols-2">
+          {audiences.map((audience) => (
+            <Reveal key={audience.role} delay={audiences.indexOf(audience) * 70}>
+              <article className="border-line bg-card flex min-h-[240px] flex-col items-start rounded-2xl border p-6 transition-shadow duration-300 hover:shadow-sm sm:p-7">
+                <span className="bg-surface text-forest mb-4 grid size-11 place-items-center rounded-xl">
+                  <audience.icon className="size-[22px]" aria-hidden="true" />
+                </span>
+                <h3 className="text-xl">{audience.title}</h3>
+                <p className="mt-2 mb-5 max-w-[48ch] text-[15px]">{audience.description}</p>
+                <AppLink
                   href={registerLink(audience.role)}
-                  variant="mint"
-                  size="sm"
-                  className="self-start"
+                  className="text-forest mt-auto inline-flex min-h-11 items-center gap-2 font-semibold hover:underline"
                 >
                   {audience.cta}
-                  <ArrowRight
-                    className="size-4 transition-transform duration-200 group-hover/btn:translate-x-1"
-                    aria-hidden="true"
-                  />
-                </ButtonLink>
-                <PreviewRows
-                  title={audience.preview.title}
-                  rows={audience.preview.rows}
-                  className="mx-3 mt-auto rounded-b-none pt-4 transition-transform duration-300 group-hover:-translate-y-1.5"
-                />
+                  <ArrowRight className="size-4" aria-hidden="true" />
+                </AppLink>
               </article>
-            );
-          })}
+            </Reveal>
+          ))}
         </div>
       </Container>
     </section>

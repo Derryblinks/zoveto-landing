@@ -2,7 +2,14 @@ import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { App } from "@/app/app";
 import { loginLink, registerLink } from "@/config/site";
-import { audiences, faq, features, navigation, plans, toolColumns } from "@/content";
+import { audiences, faq, navigation, plans } from "@/content";
+import { beforeEach } from "vitest";
+
+beforeEach(() => {
+  window.history.replaceState(null, "", "/");
+  localStorage.clear();
+  sessionStorage.clear();
+});
 
 describe("landing page", () => {
   it("has one main landmark, a single h1 and a skip link", () => {
@@ -10,6 +17,10 @@ describe("landing page", () => {
     expect(screen.getAllByRole("main")).toHaveLength(1);
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
     expect(screen.getByRole("link", { name: /skip to content/i })).toHaveAttribute("href", "#main");
+    expect(
+      screen.getByRole("img", { name: /veterinary professional caring for a dog/i }),
+    ).toHaveAttribute("src", "/images/veterinary-care.jpg");
+    expect(screen.getByText(/some features are still in development/i)).toBeInTheDocument();
   });
 
   it("points every navigation link at a section that exists", () => {
@@ -58,23 +69,6 @@ describe("landing page", () => {
     );
   });
 
-  it("marks every feature and field tool that is not available yet as planned", () => {
-    const { container } = render(<App />);
-    const planned = [...features, ...toolColumns].filter((item) => item.planned);
-    // Pharmacy marketplace, finance, records, reminders and all three field tools are planned.
-    expect(planned.length).toBeGreaterThanOrEqual(7);
-    expect(within(container).getAllByText("Planned")).toHaveLength(planned.length);
-  });
-
-  it("labels every product preview as sample entries", () => {
-    const { container } = render(<App />);
-    // One preview in each audience card, plus the main feature preview.
-    expect(within(container).getAllByText("Sample entries")).toHaveLength(audiences.length + 1);
-    // The hero dashboard says so both inside the illustration and in the caption under it.
-    expect(within(container).getByText(/sample data, not real records/i)).toBeInTheDocument();
-    expect(within(container).getByText(/illustration with sample entries/i)).toBeInTheDocument();
-  });
-
   it("says in the footer which legal and contact pages are not published yet", () => {
     const { container } = render(<App />);
     const footer = container.querySelector("footer") as HTMLElement;
@@ -102,5 +96,103 @@ describe("landing page", () => {
 
     await user.keyboard("{Escape}");
     expect(screen.queryByRole("navigation", { name: /mobile/i })).toBeNull();
+  });
+
+  it("creates a local role-specific profile from the registration page", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+
+    await user.click(screen.getByRole("link", { name: /create an account/i }));
+    await user.type(screen.getByLabelText(/full name/i), "Ama Owusu");
+    await user.type(screen.getByLabelText(/email address/i), "ama.owusu@example.test");
+    await user.type(screen.getByLabelText(/^password/i), "demo-password");
+    await user.selectOptions(screen.getByLabelText(/i am a/i), "farmer");
+    await user.click(screen.getByRole("button", { name: /create demo profile/i }));
+
+    expect(await screen.findByRole("heading", { name: /hello, ama/i })).toBeInTheDocument();
+    expect(window.location.pathname).toBe("/dashboard/farmer");
+    expect(JSON.parse(localStorage.getItem("zoveto.demo.workspace.v1") ?? "{}").profiles).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ email: "ama.owusu@example.test", role: "farmer" }),
+      ]),
+    );
+  });
+
+  it("opens a sample workspace and persists dashboard changes locally", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+
+    const loginLink = screen.getAllByRole("link", { name: /^log in$/i })[0];
+    if (!loginLink) throw new Error("The login link is missing.");
+    await user.click(loginLink);
+    await user.click(screen.getByRole("button", { name: "Veterinary professional" }));
+    expect(await screen.findByRole("heading", { name: /hello, demo/i })).toBeInTheDocument();
+
+    await user.click(screen.getByRole("link", { name: "Appointments" }));
+    await user.selectOptions(screen.getByLabelText("Update Ama’s herd appointment"), "Confirmed");
+
+    const workspace = JSON.parse(localStorage.getItem("zoveto.demo.workspace.v1") ?? "{}");
+    expect(workspace.appointments).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ id: "appointment-2", status: "Confirmed" }),
+      ]),
+    );
+  });
+
+  it("carries a pharmacy enquiry through acceptance and stock updates", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+
+    const loginLinks = screen.getAllByRole("link", { name: /^log in$/i });
+    if (!loginLinks[0]) throw new Error("The login link is missing.");
+    await user.click(loginLinks[0]);
+    await user.click(screen.getByRole("button", { name: "Livestock farmer" }));
+    await user.click(await screen.findByRole("link", { name: "Pharmacy products" }));
+    const enquiryButtons = screen.getAllByRole("button", { name: "Send enquiry" });
+    if (!enquiryButtons[0]) throw new Error("No sample product can be enquired about.");
+    await user.click(enquiryButtons[0]);
+    await user.click(screen.getByRole("link", { name: "My product enquiries" }));
+    expect(await screen.findByText("Enquiry")).toBeInTheDocument();
+
+    const signOutButtons = screen.getAllByRole("button", { name: "Sign out" });
+    if (!signOutButtons[0]) throw new Error("The sign-out button is missing.");
+    await user.click(signOutButtons[0]);
+    const returnLoginLinks = screen.getAllByRole("link", { name: /^log in$/i });
+    if (!returnLoginLinks[0]) throw new Error("The login link is missing.");
+    await user.click(returnLoginLinks[0]);
+    await user.click(screen.getByRole("button", { name: "Veterinary pharmacy" }));
+    await user.click(await screen.findByRole("link", { name: "Orders & enquiries" }));
+
+    const farmerOrder = screen.getByRole("row", { name: /demo farmer/i });
+    await user.click(within(farmerOrder).getByRole("button", { name: "Accept" }));
+
+    const workspace = JSON.parse(localStorage.getItem("zoveto.demo.workspace.v1") ?? "{}");
+    expect(workspace.orders).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ customer: "demo farmer", status: "Accepted" }),
+      ]),
+    );
+    expect(workspace.products).toEqual(
+      expect.arrayContaining([expect.objectContaining({ id: "product-1", quantity: 23 })]),
+    );
+  });
+
+  it("supports local admin review actions in development", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+
+    const loginLinks = screen.getAllByRole("link", { name: /^log in$/i });
+    if (!loginLinks[0]) throw new Error("The login link is missing.");
+    await user.click(loginLinks[0]);
+    await user.click(screen.getByRole("button", { name: "Admin preview" }));
+    expect(await screen.findByRole("heading", { name: /hello, demo/i })).toBeInTheDocument();
+
+    await user.click(screen.getByRole("link", { name: "Verifications" }));
+    await user.click(await screen.findByRole("button", { name: "Mark reviewed" }));
+
+    const workspace = JSON.parse(localStorage.getItem("zoveto.demo.workspace.v1") ?? "{}");
+    expect(workspace.profiles).toEqual(
+      expect.arrayContaining([expect.objectContaining({ id: "profile-vet", verified: true })]),
+    );
   });
 });

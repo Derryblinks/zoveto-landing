@@ -1,6 +1,6 @@
-# ZOVETO landing page
+# ZOVETO landing page and demo workspace
 
-The public marketing site for ZOVETO, the veterinary services platform for Ghana. A standalone React application: no backend and no database are needed to run it.
+The public marketing site and role-based local demo for ZOVETO, a veterinary services platform in development for Ghana. This frontend needs no backend to run.
 
 ## Run it
 
@@ -11,7 +11,7 @@ npm install
 npm run dev        # opens http://localhost:5173
 ```
 
-That is all. Optional: `cp .env.example .env` and set `VITE_APP_URL` to where the ZOVETO web application runs. Every "Log in" and "Create account" button links there (default `http://localhost:3000`).
+That is all. The landing page, sign-in and registration screens, and role-based demo workspaces run together at `http://localhost:5173`. Optionally set `VITE_APP_URL` if the application is hosted on a separate origin.
 
 | Command             | What it does                                          |
 | ------------------- | ----------------------------------------------------- |
@@ -27,34 +27,40 @@ In VS Code, accept the recommended extensions (Tailwind CSS IntelliSense, Pretti
 
 ## Stack
 
-Vite · React 19 · TypeScript (strict) · Tailwind CSS v4 · lucide-react icons · Fontsource (Inter and Space Grotesk, bundled, no external font requests) · Vitest + Testing Library · ESLint + Prettier.
+Vite · React 19 · TypeScript (strict) · Tailwind CSS v4 · lucide-react icons · Fontsource Inter (bundled, no external font requests) · Vitest + Testing Library · ESLint + Prettier.
 
 ## Structure
 
 ```
 src/
-  app/              App root: composes the page from sections
+  app/              Route switch for the landing page, demo access and workspaces
   components/
-    layout/         Header (with mobile menu), Footer, SkipLink
-    sections/       One file per page section (Hero, Audiences, Features, Plans, Faq…)
-    mockups/        Product illustrations (dashboard, phone, donut chart)
-    ui/             Reusable primitives (Button, Container, Logo, SectionHeading, StatusTag…)
+    dashboard/      Role-specific navigation, workspace shell and summary charts
+    layout/         Header, Footer and SkipLink
+    pages/          Landing, demo sign-in and workspace pages
+    sections/       Landing-page sections
+    ui/             Reusable interface primitives
+  data/             Versioned sample workspace and local persistence
+  auth/             Browser-only demo session (no password storage)
   content/          All copy and data, typed. Edit text here, not in components.
   config/           Site constants and link builders (appLink, loginLink, registerLink)
-  hooks/            Reusable hooks (useDisclosure)
-  lib/              Small utilities (cn)
+  hooks/            Reusable hooks for navigation, motion and local data
+  lib/              Small utilities for routes, themes and CSS classes
   styles/           Tailwind entry and design tokens
   test/             Test setup
 tests/              Unit and component tests
-public/             Favicon and robots.txt
+public/             Favicon, robots.txt and local images
 ```
 
 ### Conventions
 
 - **Content is separate from presentation.** Sections read from `src/content/*`, which is typed (`types.ts`). To change wording, plans, FAQ or navigation, edit those files.
 - **One section, one file.** Sections are independent. Reorder or remove them in `src/app/app.tsx`.
-- **Design tokens live in `src/styles/index.css`.** Use semantic utilities (`bg-surface`, `text-ink`, `text-muted`, `border-line`, `bg-deep`, `bg-mint`). Light and dark mode follow the visitor's system setting automatically.
+- **Design tokens live in `src/styles/index.css`.** Use semantic utilities (`bg-surface`, `text-ink`, `text-muted`, `border-line`, `bg-deep`, `bg-forest`, `bg-sage`, `bg-cream`). The main palette uses deep green `#123B35`, teal `#167C6A` and grey `#646E73`, with warm light surfaces.
+- **Theme:** the landing page follows the saved or system light/dark preference. The sign-in and demo workspaces stay light for consistent readability.
 - **Links into the app go through `src/config/site.ts`**, never hard-coded.
+- **Legal links:** set `VITE_PRIVACY_URL`, `VITE_TERMS_URL` and `VITE_SUPPORT_EMAIL` to show published policies and support contact in the footer. Missing links are identified as unpublished.
+- **Demo limits:** Sign-in only creates a browser-local demo session. Sample data is stored in this browser's `localStorage`; it is not secure, shared with a server, or synchronized across devices. No real authentication, clinical records, payments, pharmacy orders, or notifications are provided.
 - **Path alias:** `@/` points to `src/`.
 
 ## Quality
@@ -64,18 +70,17 @@ public/             Favicon and robots.txt
 
 ## Content notes before you publish
 
-- The page describes a product that is built in stages. Features that arrive after the core marketplace (health records, reminders, pharmacy catalogue, finance, offline records, disease documentation, medicine stock) carry `planned: true` in `src/content/features.ts` and `src/content/field-tools.ts`, which shows a "Planned" tag. Remove the flag as each one goes live. The hero, audience, FAQ and fact wording that says "planned" lives in the same folder and needs the same update.
-- Payment methods are not named on the page because the payment provider is not decided.
+- The page describes a product in development. Pharmacy listings, offline access, Mobile Money payments and paid plans are identified as planned features rather than available today. Update `src/content` as their status changes.
 - A **draft privacy notice** ships at `/privacy/` (words in `src/content/privacy.ts`, page in `src/app/privacy-page.tsx`). It states only what this website does today, and tests fail if the code stops matching (cookies, analytics, outside requests, items in local storage). Everything that needs a business or legal decision is shown on the page as "To be confirmed before launch". Finish it with the ZOVETO team and a legal review, then clear those items, set `draft: false` in `src/content/privacy.ts` and remove the `noindex` tag in `privacy/index.html`.
 - The terms of use and support contact are not written yet. Set `VITE_TERMS_URL` and `VITE_SUPPORT_EMAIL` (see `.env.example`) when each exists and the footer links to it. Until then the footer says it is not published yet. `VITE_PRIVACY_URL` only needs setting if the privacy notice is published somewhere else.
 - Plan prices are intentionally absent. Add them in `src/content/plans.ts` when decided.
-- The dashboard and phone illustrations use sample entries and are labelled as such.
-- The footer has no legal links. Add Terms and Privacy pages and link them from `src/components/layout/footer.tsx`.
+- The hero photograph is stored locally in `public/images/veterinary-care.jpg`.
+- Configure legal links before launch. The footer will not invent policy URLs or a support address.
 
 ## Deploying
 
 `npm run build` produces a static site in `dist/` that any static host can serve (Netlify, Vercel, Cloudflare Pages, nginx). Set `VITE_APP_URL` in the host's environment before building.
 
-## Using it with the ZOVETO application
+## Demo workspaces
 
-This site is separate from the application. Run both locally: the landing page on port 5173 and the application on port 3000. In production, serve the landing page at the main domain (for example `zoveto.com`) and the application at a subdomain (for example `app.zoveto.com`), and set `VITE_APP_URL` accordingly.
+Use the sign-in or registration page to select a farmer, animal keeper, veterinary professional or pharmacy workspace. In development, an admin preview is also available. Workspaces share the same sample data in the current browser so local changes appear across roles and tabs. Use **Export data** to download a JSON snapshot or **Reset demo** to restore the original sample records. Do not enter real personal, payment or animal health information.

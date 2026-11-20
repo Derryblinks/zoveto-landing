@@ -1,17 +1,14 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
-import { reveal } from "@/lib/reveal";
 
 interface SectionHeadingProps {
   id: string;
-  /** Short label that says what this section is, in plain words. */
   kicker?: string;
   title: ReactNode;
   description?: string;
   align?: "center" | "left";
   /** Use on dark backgrounds. */
   onDark?: boolean;
-  className?: string;
 }
 
 /** Kicker, title and intro paragraph shared by every section. The id links the heading to its section. */
@@ -22,20 +19,18 @@ export function SectionHeading({
   description,
   align = "center",
   onDark,
-  className,
 }: SectionHeadingProps) {
   return (
-    <header className={cn(align === "center" && "text-center", className)} {...reveal()}>
+    <header className={cn(align === "center" && "text-center")}>
       {kicker ? (
-        <p
+        <span
           className={cn(
-            "kicker mb-3 text-[13px] font-semibold tracking-wider uppercase",
-            align === "center" && "kicker-center",
-            onDark ? "text-mint" : "text-accent",
+            "mb-4 inline-block rounded-full border px-3.5 py-1 text-[13px] font-semibold",
+            onDark ? "text-cream border-white/25" : "border-line bg-surface text-accent",
           )}
         >
           {kicker}
-        </p>
+        </span>
       ) : null}
       <h2
         id={id}

@@ -3,32 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>ZOVETO | Veterinary care, connected across Ghana</title>
+    <title>ZOVETO | Animal care and veterinary services in Ghana</title>
     <meta
       name="description"
-      content="ZOVETO connects farmers, animal keepers, veterinary professionals and veterinary pharmacies in Ghana. Find a verified vet, book a visit and keep animal health records."
+      content="ZOVETO is being developed to help farmers, animal owners, veterinary professionals and pharmacies stay connected and keep animal health records in Ghana."
     />
-    <meta name="theme-color" content="#123b35" />
+    <meta name="theme-color" content="#FBF0BA" />
+    <script>
+      try {
+        const savedTheme = localStorage.getItem("zoveto-theme");
+        const theme =
+          savedTheme === "light" || savedTheme === "dark"
+            ? savedTheme
+            : matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light";
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+      } catch {
+        document.documentElement.dataset.theme = "light";
+        document.documentElement.style.colorScheme = "light";
+      }
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="ZOVETO | Veterinary care, connected across Ghana" />
+    <meta property="og:title" content="ZOVETO | Animal care and veterinary services in Ghana" />
     <meta
       property="og:description"
-      content="One platform for farmers, animal keepers, veterinary professionals and pharmacies."
+      content="ZOVETO is being developed to connect farmers, animal owners, veterinary professionals and pharmacies in Ghana."
     />
-    <!-- Sets the light or dark theme before the first paint, so the page never flashes the wrong one. -->
-    <script>
-      (function () {
-        try {
-          var theme = localStorage.getItem("zoveto-theme");
-          if (theme !== "light" && theme !== "dark") {
-            theme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-          }
-          document.documentElement.dataset.theme = theme;
-          document.documentElement.style.colorScheme = theme;
-        } catch (e) {}
-      })();
-    </script>
   </head>
   <body>
     <div id="root"></div>

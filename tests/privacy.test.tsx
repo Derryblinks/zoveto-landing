@@ -65,8 +65,8 @@ describe("privacy page", () => {
 
 describe("privacy notice stays true", () => {
   // The notice says the website sets no cookies, runs no analytics, makes no requests to other
-  // companies and saves one item in the browser. These tests fail if the code stops being true
-  // to that, so the notice has to be updated with the code.
+  // companies, saves only the browser items it names and never saves a password. These tests fail
+  // if the code stops being true to that, so the notice has to be updated with the code.
   it("sets no cookies and uses no analytics or tracking", () => {
     expect(filesMatching(/document\.cookie/)).toEqual([]);
     expect(
@@ -85,15 +85,40 @@ describe("privacy notice stays true", () => {
     expect(filesMatching(/https?:\/\/(?!localhost)[a-z0-9]/i)).toEqual([]);
   });
 
-  it("keeps one item in the browser, the theme choice, and the notice names it", () => {
-    const storage = filesMatching(/localStorage|sessionStorage|indexedDB/);
-    expect(storage).toEqual(["/src/lib/theme.ts"]);
+  it("keeps only the browser items the notice names", () => {
+    const storage = filesMatching(/localStorage|sessionStorage|indexedDB/).sort();
+    expect(storage).toEqual([
+      "/src/auth/demo-session.ts",
+      "/src/data/demo-workspace.ts",
+      "/src/lib/theme.ts",
+    ]);
 
+    // Each name the notice gives must be the name the code really uses.
     const wording = privacySections.flatMap((section) => section.paragraphs).join(" ");
-    expect(wording).toContain(THEME_KEY);
+    for (const [name, file] of [
+      [THEME_KEY, "/src/lib/theme.ts"],
+      ["zoveto.demo.workspace.v1", "/src/data/demo-workspace.ts"],
+      ["zoveto.demo.session.v1", "/src/auth/demo-session.ts"],
+    ] as const) {
+      expect(wording).toContain(name);
+      expect(sources[file]).toContain(name);
+    }
   });
 
-  it("has no forms or inputs where someone could enter personal information", () => {
-    expect(filesMatching(/<form\b|<input\b|<textarea\b|<select\b/)).toEqual([]);
+  it("never saves the password the demonstration forms ask for", () => {
+    expect(filesMatching(/password/i, /\/(components|content)\//)).toEqual([]);
+    const wording = privacySections.flatMap((section) => section.paragraphs).join(" ");
+    expect(wording).toMatch(/password is never saved/i);
+  });
+
+  it("asks for personal details only in the demonstration forms, and the notice says so", () => {
+    expect(filesMatching(/<form\b|<input\b|<textarea\b|<select\b/).sort()).toEqual([
+      "/src/components/dashboard/dashboard-shell.tsx",
+      "/src/components/pages/auth-page.tsx",
+      "/src/components/pages/dashboard-admin-pages.tsx",
+      "/src/components/pages/dashboard-page.tsx",
+    ]);
+    const wording = privacySections.flatMap((section) => section.paragraphs).join(" ");
+    expect(wording).toMatch(/do not enter real personal/i);
   });
 });

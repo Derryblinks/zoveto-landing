@@ -1,5 +1,4 @@
 import "@fontsource-variable/inter";
-import "@fontsource-variable/space-grotesk";
 import { StrictMode, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
 import { initTheme } from "@/lib/theme";

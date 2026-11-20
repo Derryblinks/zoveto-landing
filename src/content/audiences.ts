@@ -1,64 +1,35 @@
 import type { Audience } from "./types";
+import { Building2, PawPrint, Stethoscope, Tractor } from "lucide-react";
 
 export const audiences: Audience[] = [
   {
     role: "farmer",
     title: "For farmers",
-    description:
-      "Large buttons, short forms and clear steps. Register your herd and request a visit. Health reminders are planned.",
+    description: "Keep herd records, request a farm visit and stay on top of upcoming care.",
     cta: "Join as a farmer",
-    preview: {
-      title: "My herd",
-      rows: [
-        { label: "Cattle group A", tag: { text: "Vaccinated", tone: "ok" } },
-        { label: "Goats", tag: { text: "Deworming due", tone: "warn" } },
-        { label: "Next vet visit", tag: { text: "Confirmed", tone: "info" } },
-      ],
-    },
+    icon: Tractor,
   },
   {
     role: "keeper",
     title: "For animal keepers",
-    description:
-      "Keep a profile for every animal, search vets near you and manage bookings in one place.",
-    cta: "Join as a keeper",
-    preview: {
-      title: "My animals",
-      rows: [
-        { label: "Dog profile", tag: { text: "Up to date", tone: "ok" } },
-        { label: "Cat profile", tag: { text: "Booster due", tone: "warn" } },
-        { label: "Vet appointment", tag: { text: "Requested", tone: "info" } },
-      ],
-    },
+    description: "Keep a record for each pet and find veterinary care when you need it.",
+    cta: "Join as an animal keeper",
+    icon: PawPrint,
   },
   {
     role: "vet",
     title: "For veterinary professionals",
     description:
-      "Manage your profile and appointment requests. Clinical records, medicine stock, invoices and offline notes are planned.",
+      "Organise client records, appointment requests, medicine stock and invoices. Offline access is planned.",
     cta: "Join as a vet",
-    preview: {
-      title: "Booking requests",
-      rows: [
-        { label: "Farm visit", tag: { text: "Requested", tone: "info" } },
-        { label: "Clinic consultation", tag: { text: "Accepted", tone: "ok" } },
-        { label: "Record saved offline", tag: { text: "Pending Sync", tone: "warn" } },
-      ],
-    },
+    icon: Stethoscope,
   },
   {
     role: "pharmacy",
     title: "For pharmacies",
     description:
-      "Planned: list your catalogue, track batches and expiry dates, and manage orders from vets and farmers. Pharmacy accounts are reviewed before listing.",
+      "Share product information and keep track of stock, batches and expiry dates. The pharmacy directory is planned.",
     cta: "Register a pharmacy",
-    preview: {
-      title: "Inventory",
-      rows: [
-        { label: "Dewormer, in stock", tag: { text: "In stock", tone: "ok" } },
-        { label: "Vaccine, near expiry", tag: { text: "Near expiry", tone: "warn" } },
-        { label: "Order awaiting reply", tag: { text: "Received", tone: "info" } },
-      ],
-    },
+    icon: Building2,
   },
 ];

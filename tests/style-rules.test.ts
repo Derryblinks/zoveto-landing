@@ -56,10 +56,17 @@ describe("design rules", () => {
   it("keeps outline buttons visible: no variant shares a border colour with the base", () => {
     // Classes are joined without merging, so two border colours on one element are decided by
     // stylesheet order, and `border-transparent` wins over `border-ink/25`.
-    for (const variant of ["mint", "outline-light", "primary", "outline", "dark"] as const) {
+    for (const variant of [
+      "cream",
+      "mint",
+      "outline-light",
+      "primary",
+      "outline",
+      "dark",
+    ] as const) {
       const colours = buttonClasses(variant)
         .split(" ")
-        .filter((c) => /^border-(transparent|ink|white|line)/.test(c));
+        .filter((c) => /^border-(transparent|ink|white|line|accent|deep|cream)(\/|$)/.test(c));
       expect(colours, `${variant} has more than one border colour`).toHaveLength(1);
     }
   });

@@ -2,8 +2,8 @@ import type { PrivacySection } from "./types";
 
 /**
  * The privacy notice for this website. Everything stated as fact describes what the website
- * does today, and a test keeps it true (no cookies, no analytics, no outside requests, one
- * item in local storage). Anything that needs a business or legal decision is listed in
+ * does today, and a test keeps it true (no cookies, no analytics, no outside requests, only the
+ * browser storage named below, no password saved). Anything that needs a business or legal decision is listed in
  * `toConfirm` and shown as "To be confirmed". Nothing is invented. Finish the notice with the
  * ZOVETO team and a legal review, then clear `toConfirm`, set `draft` to false and remove the
  * noindex tag in privacy/index.html.
@@ -11,8 +11,8 @@ import type { PrivacySection } from "./types";
 export const privacy = {
   title: "Privacy notice",
   intro:
-    "This notice explains what the ZOVETO website does with information about you. It is short because the website collects very little.",
-  updated: "19 November 2026",
+    "This notice explains what the ZOVETO website does with information about you. It is short because the website sends nothing to a server: anything you type into the demonstration stays in your own browser.",
+  updated: "20 November 2026",
   draft: true,
   draftNotice:
     "This notice is a draft. The parts marked “To be confirmed” need decisions from the ZOVETO team and a legal review before launch.",
@@ -23,15 +23,15 @@ export const privacySections: PrivacySection[] = [
     id: "scope",
     heading: "What this notice covers",
     paragraphs: [
-      "This notice covers the public ZOVETO website. It does not cover the ZOVETO web application, which you reach with the Log in and Create account buttons.",
+      "This notice covers the public ZOVETO website, including its demonstration sign-in and sample workspaces. The real ZOVETO application is still being developed and is not covered here.",
     ],
   },
   {
     id: "collected",
     heading: "What this website collects",
     paragraphs: [
-      "You do not enter any personal information on this website. It has no forms, no accounts and no comments.",
-      "It does not use cookies, analytics, advertising or tracking tools. It does not load fonts, scripts or images from other companies.",
+      "The website does not send any information to ZOVETO or to anyone else. It does not use cookies, analytics, advertising or tracking tools, and it does not load fonts, scripts or images from other companies.",
+      "The demonstration has sign-in and registration forms that ask for a name, an email address, a password and a role. They create no real account. Do not enter real personal, payment or animal health information. The password is never saved.",
     ],
     toConfirm: ["Who hosts this website, and what visit records (server logs) the host keeps."],
   },
@@ -39,15 +39,16 @@ export const privacySections: PrivacySection[] = [
     id: "browser",
     heading: "What is saved in your browser",
     paragraphs: [
-      "If you use the light and dark mode switch, the site saves your choice in your browser’s local storage under the name zoveto-theme. It holds one word, light or dark. It stays on your device and is never sent to us.",
-      "To remove it, clear this site’s data in your browser.",
+      "If you use the light and dark mode switch, the site saves your choice in your browser’s local storage under the name zoveto-theme. It holds one word, light or dark.",
+      "If you use the demonstration, your browser also keeps the profile you typed (name, email address and role) and the sample records you change, in local storage under the name zoveto.demo.workspace.v1. It keeps which profile is signed in in session storage under the name zoveto.demo.session.v1, which is cleared when you close the tab. The Export data button saves a copy of the demonstration data as a file on your device.",
+      "All of this stays on your device and is never sent to us. To remove it, clear this site’s data in your browser.",
     ],
   },
   {
     id: "application",
-    heading: "The ZOVETO application",
+    heading: "The real ZOVETO application",
     paragraphs: [
-      "Log in and Create account take you to the ZOVETO web application. When you register there, you give information to the application, not to this website.",
+      "Log in and Create account currently open the demonstration. When the real application opens, this notice will be updated to explain what it collects and why.",
     ],
     toConfirm: [
       "What personal information the application collects, why, who can see it and how long it is kept.",

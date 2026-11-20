@@ -1,24 +1,23 @@
 import { facts } from "@/content";
-import { reveal } from "@/lib/reveal";
 import { Container } from "@/components/ui/container";
+import { Reveal } from "@/components/ui/reveal";
 
 export function Facts() {
   return (
-    <section aria-label="ZOVETO in numbers" className="py-24">
+    <section aria-label="What guides ZOVETO" className="py-16">
       <Container>
-        <dl className="grid gap-10 text-center sm:grid-cols-3">
-          {facts.map((fact, index) => (
-            <div key={fact.label} {...reveal(index, 140, "scale")}>
-              <dt className="sr-only">{fact.label}</dt>
-              <dd>
-                <span className="font-display text-accent block text-[clamp(2.6rem,6vw,4rem)] leading-none font-bold tracking-tight">
-                  {fact.value}
-                </span>
-                <span className="mx-auto mt-2 block max-w-[22ch] text-[15px]">{fact.label}</span>
-              </dd>
-            </div>
-          ))}
-        </dl>
+        <Reveal>
+          <dl className="border-line grid gap-8 border-y py-8 text-center sm:grid-cols-3 sm:py-10">
+            {facts.map((fact) => (
+              <div key={fact.label}>
+                <dt className="font-display text-forest text-lg font-semibold">{fact.value}</dt>
+                <dd>
+                  <span className="mx-auto mt-1 block max-w-[30ch] text-[15px]">{fact.label}</span>
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </Reveal>
       </Container>
     </section>
   );

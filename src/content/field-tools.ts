@@ -2,38 +2,40 @@ import { AlertTriangle, Pill, WifiOff } from "lucide-react";
 import type { Fact, ToolColumn } from "./types";
 
 export const facts: Fact[] = [
-  { value: "4", label: "role-based dashboards, each built for its own work" },
-  { value: "6", label: "priority animal diseases planned for documentation" },
-  { value: "0", label: "AI-made diagnoses or treatment decisions" },
+  { value: "Ghana first", label: "Shaped around local animal-care needs" },
+  { value: "Farm and home", label: "For livestock and companion animals" },
+  { value: "People-led care", label: "Veterinary decisions stay with professionals" },
 ];
 
 export const toolColumns: ToolColumn[] = [
   {
     title: "Offline clinical records",
     description:
-      "Register clients and animals, write clinical notes and view records you have already synced, with no signal. Changes upload when you reconnect.",
+      "Offline record-keeping is planned so veterinary professionals can work through poor connections and sync when they’re back online.",
     icon: WifiOff,
     planned: true,
-    points: [
-      "Pending Sync, Syncing, Synced, Sync Failed",
-      "Nothing deleted until the server confirms",
-      "Retry and audit trail",
-    ],
+    points: ["Client and animal records", "Consultation notes", "Sync when a connection returns"],
   },
   {
-    title: "Disease documentation",
+    title: "Disease records",
     description:
-      "Record suspected anthrax, rabies, African Swine Fever, Newcastle Disease, PPR and Avian Influenza.",
+      "Record observations about priority animal diseases and prepare details for the relevant authorities.",
     icon: AlertTriangle,
-    planned: true,
-    points: ["Counts, deaths, location and samples", "Guidance to official channels"],
+    points: [
+      "Cases, location and samples",
+      "Deaths and other outcomes",
+      "Follow official reporting requirements",
+    ],
   },
   {
     title: "Medicine stock",
     description:
-      "Track drugs, batches and expiry dates, with stock updated as treatments are recorded.",
+      "Keep track of medicines, batches and expiry dates, and note stock used for treatment.",
     icon: Pill,
-    planned: true,
-    points: ["Low-stock and expiry alerts", "A record of every stock movement"],
+    points: [
+      "Low-stock and expiry reminders",
+      "Vaccine storage notes",
+      "Purchase prices and stock used",
+    ],
   },
 ];
