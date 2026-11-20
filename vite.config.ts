@@ -8,6 +8,15 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: { alias: { "@": path.resolve(__dirname, "src") } },
   server: { port: 5173, open: true },
+  // Two pages: the landing page and the privacy notice at /privacy/.
+  build: {
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, "index.html"),
+        privacy: path.resolve(__dirname, "privacy/index.html"),
+      },
+    },
+  },
   test: {
     environment: "jsdom",
     globals: true,

@@ -28,13 +28,18 @@ const cleanEmail = (value?: string): string | undefined => {
   return email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? email : undefined;
 };
 
+/** The draft privacy notice that ships with this site (privacy/index.html). */
+export const PRIVACY_PAGE_PATH = "/privacy/";
+
 /**
- * The privacy notice, terms and support contact are launch decisions for the ZOVETO team, so
- * none is invented here. Each one is set through the environment. Until it is, the footer says
- * it is not published yet instead of linking to a page that does not exist.
+ * The terms and support contact are launch decisions for the ZOVETO team, so none is invented
+ * here. Each one is set through the environment. Until it is, the footer says it is not
+ * published yet instead of linking to a page that does not exist. The privacy notice is the
+ * exception: a draft page ships with the site, so it is linked by default, and
+ * `VITE_PRIVACY_URL` replaces it if the team publishes the notice somewhere else.
  */
 export function resolveLegal(env: LegalEnv): Legal {
-  const privacy = cleanUrl(env.VITE_PRIVACY_URL);
+  const privacy = cleanUrl(env.VITE_PRIVACY_URL) ?? PRIVACY_PAGE_PATH;
   const terms = cleanUrl(env.VITE_TERMS_URL);
   const email = cleanEmail(env.VITE_SUPPORT_EMAIL);
 

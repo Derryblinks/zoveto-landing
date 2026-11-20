@@ -11,12 +11,16 @@ const legal = resolveLegal(import.meta.env);
 const toSentenceList = (items: string[]) =>
   items.length < 2 ? items.join("") : `${items.slice(0, -1).join(", ")} and ${items.at(-1)}`;
 
-export function Footer() {
+/**
+ * `homePath` is put in front of the section links, so pages other than the home page can send
+ * visitors back to a section (for example "/" turns "#plans" into "/#plans").
+ */
+export function Footer({ homePath = "" }: { homePath?: string }) {
   return (
     <footer className="bg-deep text-on-deep-muted py-12 text-sm">
       <Container className="grid gap-10 md:grid-cols-[1.2fr_1fr_1.6fr]">
         <div {...reveal(0, 100)}>
-          <a href="#top" aria-label="ZOVETO home">
+          <a href={`${homePath}#top`} aria-label="ZOVETO home">
             <Logo />
           </a>
           <p className="mt-3 max-w-[40ch]">
@@ -29,7 +33,7 @@ export function Footer() {
               {navigation.map((item) => (
                 <li key={item.href}>
                   <a
-                    href={item.href}
+                    href={`${homePath}${item.href}`}
                     className="hover:text-mint inline-block transition duration-200 hover:translate-x-1"
                   >
                     {item.label}

@@ -59,6 +59,14 @@ export interface FaqEntry {
   answer: string;
 }
 
+/** One part of the privacy notice. `toConfirm` lists decisions the ZOVETO team still has to make. */
+export interface PrivacySection {
+  id: string;
+  heading: string;
+  paragraphs: string[];
+  toConfirm?: string[];
+}
+
 export interface TrustPoint {
   label: string;
   icon: LucideIcon;

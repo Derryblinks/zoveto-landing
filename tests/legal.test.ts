@@ -1,4 +1,4 @@
-import { resolveLegal } from "@/config/legal";
+import { PRIVACY_PAGE_PATH, resolveLegal } from "@/config/legal";
 
 describe("footer legal links", () => {
   it("lists every link that is configured", () => {
@@ -16,9 +16,10 @@ describe("footer legal links", () => {
   });
 
   it("names what is not published instead of inventing it", () => {
+    // The draft privacy notice ships with the site, so it is linked by default.
     expect(resolveLegal({})).toEqual({
-      links: [],
-      missing: ["privacy notice", "terms of use", "support contact"],
+      links: [{ label: "Privacy notice", href: PRIVACY_PAGE_PATH }],
+      missing: ["terms of use", "support contact"],
     });
     expect(resolveLegal({ VITE_TERMS_URL: "  ", VITE_SUPPORT_EMAIL: "" }).missing).toContain(
       "terms of use",
@@ -37,7 +38,8 @@ describe("footer legal links", () => {
       VITE_TERMS_URL: "//evil.example/terms",
       VITE_SUPPORT_EMAIL: "not an email",
     });
-    expect(links).toEqual([]);
-    expect(missing).toHaveLength(3);
+    // A rejected privacy address falls back to the built-in page, never to the unsafe value.
+    expect(links).toEqual([{ label: "Privacy notice", href: PRIVACY_PAGE_PATH }]);
+    expect(missing).toEqual(["terms of use", "support contact"]);
   });
 });

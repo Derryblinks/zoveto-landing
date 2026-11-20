@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Privacy notice | ZOVETO</title>
+    <meta name="description" content="What the ZOVETO website does with information about you." />
+    <!-- DRAFT: keep search engines away until the notice is final. Remove this tag when it is. -->
+    <meta name="robots" content="noindex, follow" />
+    <meta name="theme-color" content="#123b35" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Sets the light or dark theme before the first paint, so the page never flashes the wrong one. -->
+    <script>
+      (function () {
+        try {
+          var theme = localStorage.getItem("zoveto-theme");
+          if (theme !== "light" && theme !== "dark") {
+            theme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+          }
+          document.documentElement.dataset.theme = theme;
+          document.documentElement.style.colorScheme = theme;
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/privacy-main.tsx"></script>
+  </body>
+</html>

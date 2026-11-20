@@ -78,13 +78,16 @@ describe("landing page", () => {
   it("says in the footer which legal and contact pages are not published yet", () => {
     const { container } = render(<App />);
     const footer = container.querySelector("footer") as HTMLElement;
-    // No address is configured in tests, so nothing is linked and nothing is made up.
+    // The draft privacy page is linked. No terms or contact address is configured in tests, so
+    // those are named as not published and nothing is made up.
     expect(
-      within(footer).getByText(
-        /not yet published: privacy notice, terms of use and support contact/i,
-      ),
+      within(footer).getByText(/not yet published: terms of use and support contact/i),
     ).toBeInTheDocument();
-    expect(within(footer).queryByRole("link", { name: /privacy|terms|contact/i })).toBeNull();
+    expect(within(footer).getByRole("link", { name: /privacy notice/i })).toHaveAttribute(
+      "href",
+      "/privacy/",
+    );
+    expect(within(footer).queryByRole("link", { name: /terms|contact/i })).toBeNull();
   });
 
   it("opens and closes the mobile menu", async () => {
